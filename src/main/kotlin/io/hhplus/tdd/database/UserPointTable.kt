@@ -2,13 +2,15 @@ package io.hhplus.tdd.database
 
 import io.hhplus.tdd.point.UserPoint
 import org.springframework.stereotype.Component
+import java.util.concurrent.ConcurrentHashMap
 
 /**
  * 해당 Table 클래스는 변경하지 않고 공개된 API 만을 사용해 데이터를 제어합니다.
  */
 @Component
 class UserPointTable {
-    private val table = HashMap<Long, UserPoint>()
+    // HashMap -> ConcurrentHashMap 변경
+    private val table = ConcurrentHashMap<Long, UserPoint>()
 
     fun selectById(id: Long): UserPoint {
         Thread.sleep(Math.random().toLong() * 200L)
@@ -20,5 +22,9 @@ class UserPointTable {
         val userPoint = UserPoint(id = id, point = amount, updateMillis = System.currentTimeMillis())
         table[id] = userPoint
         return userPoint
+    }
+
+    fun clear() {
+        table.clear()
     }
 }

@@ -16,7 +16,7 @@ class PointController(
      * TODO - 특정 유저의 포인트를 조회하는 기능을 작성해주세요.
      */
     @GetMapping("{id}")
-    fun point(
+    suspend fun point(
         @PathVariable id: Long,
     ): UserPoint {
         return pointService.getPointById(id)
@@ -26,7 +26,7 @@ class PointController(
      * TODO - 특정 유저의 포인트 충전/이용 내역을 조회하는 기능을 작성해주세요.
      */
     @GetMapping("{id}/histories")
-    fun history(
+    suspend fun history(
         @PathVariable id: Long,
     ): List<PointHistory> {
         return pointService.getPointHistoriesById(id)
@@ -36,7 +36,7 @@ class PointController(
      * TODO - 특정 유저의 포인트를 충전하는 기능을 작성해주세요.
      */
     @PatchMapping("{id}/charge")
-    fun charge(
+    suspend fun charge(
         @PathVariable id: Long,
         @RequestBody amount: Long,
     ): UserPoint {
@@ -47,7 +47,7 @@ class PointController(
      * TODO - 특정 유저의 포인트를 사용하는 기능을 작성해주세요.
      */
     @PatchMapping("{id}/use")
-    fun use(
+    suspend fun use(
         @PathVariable id: Long,
         @RequestBody amount: Long,
     ): UserPoint {
